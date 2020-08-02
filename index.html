@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input id="pin-value" class="form-control" type="text">
+                    <button id="generate-button" class="generate-btn">Generate Pin</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-section half-width">
+                    <input id="digit-value" class="form-control" type="text">
+                    <div class="numbers">
+                        <div class="calc-body">
+                        
+                            <div class="calc-button-row">
+                              <div id="7" class="button" onclick=digit(7)>7</div>
+                              <div id="8" class="button" onclick=digit(8)>8</div>
+                              <div id="9" class="button" onclick=digit(9)>9</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div id="4" class="button" onclick=digit(4)>4</div>
+                              <div id="5" class="button" onclick=digit(5)>5</div>
+                              <div id="6" class="button" onclick=digit(6)>6</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div id="1" class="button" onclick=digit(1)>1</div>
+                              <div id="2" class="button" onclick=digit(2)>2</div>
+                              <div id="3" class="button" onclick=digit(3)>3</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div  class="button" onclick=backSpace()>></div>
+                                <div id="0" class="button" onclick=digit(0)>0</div>
+                                <div class="button" onclick="reset()">C</div>
+                            </div>
+                            <div>
+                                <button id="submit-button" type="submit" class="submit-btn">Submit</button>
+                                <p class="action-left">3 try left</p>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="notification" class="notify-section">
+            <p id="not-match" class="notify">❌ Pin Didn't Match, Please try again</p>
+            <p id="match" class="notify">✅ Pin Matched... Secret door is opening for you</p>
+        </div>
+    </div>
+    </div>
+    </div>
+<script>
+        //generate random button
+        const generateButton = document.getElementById('generate-button');
+        generateButton.addEventListener("click", function(){
+        var val = Math.floor(1000 + Math.random() * 9000);
+        document.getElementById('pin-value').value = val;
+        
+        })
+
+        //digit Showing
+        function digit(i){
+            document.getElementById('digit-value').value = document.getElementById('digit-value').value + i;
+            
+        }
+        //for backspace
+        function backSpace(){
+            document.getElementById('digit-value').value = document.getElementById('digit-value').value.slice(0, - 1);
+        }
+
+        //to clear output   
+        function reset(){
+        var resetButton = document.getElementById("digit-value");
+        if(resetButton){
+        resetButton.value= "";
+        }
+        }
+
+        //pin-matched condition
+        document.getElementById('submit-button').addEventListener('click', function(){
+            let y = document.getElementById('pin-value').value;
+            let z = document.getElementById('digit-value').value;
+            if(y===z){
+                const confirmation1 = document.getElementById('match');
+                confirmation1.style.display = "block";
+                consol.log("matched")
+            }
+            else{
+                const confirmation1 = document.getElementById('not-match');
+                confirmation1.style.display = "block";
+                consol.log("not-matched")
+            }
+        })
+</script>
+</body>
+</html>
