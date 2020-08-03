@@ -44,7 +44,7 @@
                             </div>
                             <div>
                                 <button id="submit-button" type="submit" class="submit-btn">Submit</button>
-                                <p class="action-left">3 try left</p>
+                                <p id="try-left" class="action-left">3 try left</p>
                             </div>
                         
                     </div>
@@ -93,14 +93,46 @@
             if(y===z){
                 const confirmation1 = document.getElementById('match');
                 confirmation1.style.display = "block";
-                consol.log("matched")
+                const confirmation2 = document.getElementById('not-match');
+                confirmation2.style.display = "none";
+                submitOption.parentNode.removeChild(submitOption);
+                tryRemaining.textContent = 'submission done';
+                tryRemaining.style.color = 'green';
             }
             else{
                 const confirmation1 = document.getElementById('not-match');
                 confirmation1.style.display = "block";
-                consol.log("not-matched")
+                const confirmation2 = document.getElementById('match');
+                confirmation2.style.display = "none";
+               
+               //if password is wrong then you have 3 chances
+                    if(i<=3){
+                        tryAgain(i);
+                        i++;
+                    }
+                }
+            })
+            var i=1;
+            var submitOption =  document.getElementById('submit-button');
+            var tryRemaining = document.querySelector('p');
+                
+            function tryAgain(x){
+                if(i==1){
+                    tryRemaining.textContent = '2 try left';               
+                }
+
+                else if(i==2){
+                    tryRemaining.textContent = '1 try left';
+                    
+                }
+
+                else if(i==3){
+                    tryRemaining.textContent = '0 try left';
+                    submitOption.parentNode.removeChild(submitOption);
+                }
             }
-        })
+
+                
 </script>
 </body>
 </html>
